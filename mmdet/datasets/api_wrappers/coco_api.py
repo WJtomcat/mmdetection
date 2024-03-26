@@ -5,7 +5,8 @@ import warnings
 
 import pycocotools
 from pycocotools.coco import COCO as _COCO
-from pycocotools.cocoeval import COCOeval as _COCOeval
+# from pycocotools.cocoeval import COCOeval as _COCOeval
+from .cocoeval import COCOeval as _COCOeval
 
 
 class COCO(_COCO):
