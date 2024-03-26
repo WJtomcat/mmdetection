@@ -82,6 +82,7 @@ class COCOeval:
         
         self.rc = None
         self.pr = None
+        self.score = None
 
 
     def _prepare(self):
@@ -392,6 +393,7 @@ class COCOeval:
                         if nd:
                             self.rc = rc
                             self.pr = pr
+                            self.score = dtScoresSorted
                             recall[t,k,a,m] = rc[-1]
                         else:
                             recall[t,k,a,m] = 0

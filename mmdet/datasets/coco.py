@@ -593,6 +593,7 @@ class CocoDataset(CustomDataset):
                     f'{ap[4]:.3f} {ap[5]:.3f}')
                 eval_results["pr"] = cocoEval.pr
                 eval_results["rc"] = cocoEval.rc
+                eval_results["score"] = cocoEval.score
 
         return eval_results
 
@@ -656,20 +657,14 @@ class CocoDataset(CustomDataset):
         print(eval_results)
         rc = eval_results["rc"]
         pr = eval_results["pr"]
-        # 绘制pr曲线
+        score = eval_results["score"]
+        # 绘制recall&precision vs score曲线
         import matplotlib.pyplot as plt
-        plt.plot(rc, pr)
-        plt.xlabel("recall")
-        plt.ylabel("precision")
-        plt.title("pr curve")
+        plt.plot(score, rc, label='recall')
+        plt.plot(score, pr, label='precision')
+        plt.legend()
+        
         # 保存
-        plt.savefig("pr_curve.png")
+        plt.savefig("pr_rc.png")
 
-        # 绘制rp曲线
-        plt.plot(pr, rc)
-        plt.xlabel("precision")
-        plt.ylabel("recall")
-        plt.title("rp curve")
-        # 保存
-        plt.savefig("rp_curve.png")
         return eval_results
